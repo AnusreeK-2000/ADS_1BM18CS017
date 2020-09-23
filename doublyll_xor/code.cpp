@@ -49,6 +49,40 @@ Node* insert_end(Node *head, int data)
     curr->ptr = XOR(prev, new_node);
     return head;
 }
+
+Node* delete_end(Node *head)
+{
+    Node *prev = NULL;
+    Node *curr = head;
+    Node *next = XOR(prev, curr->ptr);
+    if(head == NULL){
+        return NULL;
+
+    }
+    while (next != NULL) {  
+        prev = curr;  
+        curr = next;  
+        next = XOR(prev, curr->ptr);  
+    }
+    if(prev != NULL){
+        prev->ptr = XOR(prev->ptr, curr);
+    }
+    delete curr;
+    return head;
+}
+
+Node* delete_begin(Node *head)
+{
+    if(head == NULL){
+        return NULL;
+
+    }
+    Node *temp = XOR(head->ptr,NULL);
+    temp->ptr = XOR(head, temp->ptr);
+    delete head;
+    return temp;
+}
+
 void printList (Node *head)
 {
     Node *curr = head;
@@ -88,6 +122,13 @@ for(int i = 0; i < n; i++){
    cin>>data;
   head1 = insert_end(head1, data);
 }
+printList(head1);
+
+cout<<"After deleting the last node from the second list ";
+head1 = delete_end(head1);
+printList(head1);
+cout<<"After deleting the first node from the second list ";
+head1 = delete_begin(head1);
 printList(head1);
 
 return 0;
