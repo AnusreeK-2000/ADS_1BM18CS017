@@ -1,9 +1,11 @@
 #include<bits/stdc++.h> 
 using namespace std; 
   
-void printUnique(int l, int r) 
-{ 
-	for (int i=l ; i<=r ; i++) 
+vector<int> uniqueNumbers(int L,int R)
+{
+      
+        vector<int> res;
+        for (int i=L ; i<=R ; i++) 
     	{ 
         	int num = i; 
         	bool visited[10] = {false}; 
@@ -18,9 +20,10 @@ void printUnique(int l, int r)
             		num = num/10; 
         	} 
         	if (num == 0) 
-            		cout << i << " "; 
+            		res.push_back(i); 
     	} 
-} 
+    	return res;
+}
   
 int main() 
 { 
@@ -29,7 +32,9 @@ int main()
 	cin>>l;
 	cout<<"R = ";
 	cin>>r;
-    	printUnique(l, r); 
+    	vector<int> res = uniqueNumbers(l, r); 
+	for(int i=0; i<res.size(); i++)
+		cout<<res[i]<<" ";
 	cout<<endl;
     	return 0; 
 } 
